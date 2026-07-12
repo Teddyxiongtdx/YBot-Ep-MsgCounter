@@ -1,0 +1,31 @@
+{
+    # category
+    "messages": {
+        "_total": 1,
+        # platform
+        "yunhu": {
+            "_total": 1,
+            # date
+            "260705": {
+                "_total": 1,
+                # type
+                "users": {
+                    # userid
+                    "1234567": {
+                        "_total": 1,
+                        "987654321": 1
+                    }
+                },
+                "groups": {
+                    # groupid
+                    "987654321": {
+                        "_total": 1,
+                        "1234567": 1
+                    }
+                }
+            }
+        }
+    },
+    "notices": {},# ...
+    "requests": {}# ...
+}

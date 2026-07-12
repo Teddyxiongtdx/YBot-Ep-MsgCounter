@@ -1,0 +1,14 @@
+[project]
+name = "ErisPulse-MsgCounter"
+version = "1.0.0"
+description = "1"
+requires-python = ">=3.9"
+
+dependencies = [
+]
+
+[tool.setuptools]
+packages = ["ErisPulse_MsgCounter"]
+
+[project.entry-points."erispulse.module"]
+"MsgCounter" = "ErisPulse_MsgCounter:Main"
