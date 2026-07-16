@@ -73,6 +73,8 @@ class Main(BaseModule):
             stored = self.sdk.storage.get("__ep_counter_data__", {})
             if not stored:
                 return Main._default_counter()
+            if "GroupEnter" not in stored:
+                stored["GroupEnter"] = {}
             return stored
         except (json.JSONDecodeError, TypeError, AttributeError) as e:
             self.logger.error(f"加载统计数据时出错: {e}")
