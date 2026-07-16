@@ -1,0 +1,37 @@
+[ErisPulse.adapters]
+
+[ErisPulse.framework]
+enable_lazy_loading = true
+strict_mode = 0
+uninit_timeout = 30
+
+[ErisPulse.i18n]
+language = "auto"
+
+[ErisPulse.logger]
+format = "rich"
+level = "INFO"
+log_files = []
+memory_limit = 1000
+
+[ErisPulse.modules]
+
+[ErisPulse.server]
+host = "0.0.0.0"
+port = 8000
+
+[ErisPulse.storage]
+use_global_db = false
+
+[ErisPulse.event.command]
+allow_space_prefix = false
+case_sensitive = true
+must_at_bot = false
+prefix = "/"
+
+[ErisPulse.event.message]
+ignore_self = true
+
+[ErisPulse.framework.strict_mode_exceptions]
+adapters = []
+modules = []

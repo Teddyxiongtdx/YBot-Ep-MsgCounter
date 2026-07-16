@@ -38,7 +38,8 @@ class Main(BaseModule):
         return {
             "messages": {"_total": 0},
             "notices": {"_total": 0},
-            "requests": {"_total": 0}
+            "requests": {"_total": 0},
+            "GroupEnter": {}
         }
 
     # 2.增加记录并自动维护所有total
@@ -58,6 +59,12 @@ class Main(BaseModule):
         groups = d.setdefault('groups', {})
         group = groups.setdefault(gid, {'_total': 0})
         group['_total'] += 1
+        group[uid] = group.get(uid, 0) + 1
+    
+    @staticmethod
+    def _add_record_enter(counter, platform, uid, gid):
+        p = counter.setdefault(platform, {})
+        group = p.setdefault(gid, {})
         group[uid] = group.get(uid, 0) + 1
 
     # s1.加载器
@@ -97,10 +104,14 @@ class Main(BaseModule):
 
         @sdk.adapter.on("notice")
         async def on_notice(data):
-            platform = data.get('platform', 'unknown')
-            date = datetime.now().strftime("%y%m%d")
             uid = data.get('user_id', 'default_user_id')
             gid = data.get('group_id', 'default_group_id')
+            platform = data.get('platform', 'unknown')
+
+            if data.get("detail_type")=="group_member_increase":
+                Main._add_record_enter(self.counter["GroupEnter"], platform, uid, gid)
+            
+            date = datetime.now().strftime("%y%m%d")
             Main._add_record(self.counter["notices"], platform, date, uid, gid)
 
         @sdk.adapter.on("request")
@@ -275,6 +286,10 @@ class Main(BaseModule):
                     'last_30_days': self.by_time(platform, uid, gid, days=30, reply="dict")
                 }
             }
+
+    def get_enter(self, platform, uid, gid):
+        p = self.counter.get("GroupEnter",{}).get(platform, {})
+        return p.get(gid,{}).get(uid, 0)
 
     def reset(self):
         self.counter = self._default_counter()
