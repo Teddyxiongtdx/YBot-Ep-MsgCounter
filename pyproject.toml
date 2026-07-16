@@ -1,6 +1,6 @@
 [project]
 name = "ErisPulse-MsgCounter"
-version = "1.0.1"
+version = "1.0.11"
 description = "ErisPulse 框架的消息计数器模块"
 requires-python = ">=3.9"
 readme = "README.md"
